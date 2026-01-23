@@ -105,15 +105,6 @@ const LeadForm = forwardRef<HTMLElement>((_, ref) => {
         throw new Error("Erro ao salvar dados");
       }
 
-      const { error: emailError } = await supabase.functions.invoke(
-        "send-lead-confirmation",
-        { body: { name: formData.name, email: formData.email } }
-      );
-
-      if (emailError) {
-        console.error("Error sending email:", emailError);
-      }
-
       toast({
         title: "Diagnóstico Solicitado! 🎉",
         description: "Em breve você receberá seu diagnóstico personalizado por e-mail.",
