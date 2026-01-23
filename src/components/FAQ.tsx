@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 
 const FAQ = () => {
@@ -31,7 +26,7 @@ const FAQ = () => {
     {
       question: "O que está incluso no diagnóstico financeiro?",
       answer:
-        "O diagnóstico inclui: análise completa da sua situação atual, identificação de gastos desnecessários, sugestões de economia, plano de ação personalizado e uma consultoria gratuita de 30 minutos para tirar suas dúvidas.",
+        "O diagnóstico inclui: análise do patrimonio atual, projeção do potencial patrimonial, sugestões de economia, plano de ação personalizado para multiplicar em 10x seu patrimonio e uma consultoria gratuita de 30 minutos para tirar suas dúvidas.",
     },
     {
       question: "Posso fazer o diagnóstico mesmo estando endividado?",
@@ -73,9 +68,7 @@ const FAQ = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary text-sm font-medium uppercase tracking-wider">
-            Dúvidas Frequentes
-          </span>
+          <span className="text-primary text-sm font-medium uppercase tracking-wider">Dúvidas Frequentes</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-6">
             Perguntas
             <span className="text-gradient-gold"> Frequentes</span>
