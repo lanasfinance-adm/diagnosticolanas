@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-interface LeadFormProps {
-  formRef: React.RefObject<HTMLDivElement>;
-}
-const LeadForm = ({
-  formRef
-}: LeadFormProps) => {
+
+const LeadForm = forwardRef<HTMLElement>((_, ref) => {
   const {
     toast
   } = useToast();
@@ -43,7 +39,7 @@ const LeadForm = ({
     }));
   };
   const guarantees = ["Diagnóstico 100% gratuito", "Sem compromisso", "Dados protegidos"];
-  return <section ref={formRef} className="py-20 bg-gradient-dark relative overflow-hidden">
+  return <section ref={ref} className="py-20 bg-gradient-dark relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
@@ -201,5 +197,7 @@ Financeiro Gratuito
         </div>
       </div>
     </section>;
-};
+});
+
+LeadForm.displayName = "LeadForm";
 export default LeadForm;

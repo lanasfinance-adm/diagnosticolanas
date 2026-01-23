@@ -7,7 +7,7 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  const formRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLElement>(null);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -19,7 +19,7 @@ const Index = () => {
       <Benefits />
       <Testimonials />
       <FAQ />
-      <LeadForm formRef={formRef} />
+      <LeadForm ref={formRef} />
       <Footer />
     </main>
   );
