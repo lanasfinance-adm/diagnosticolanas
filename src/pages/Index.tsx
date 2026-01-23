@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import LeadForm from "@/components/LeadForm";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <Hero onCtaClick={scrollToForm} />
       <Benefits />
       <Testimonials />
+      <FAQ />
       <LeadForm formRef={formRef} />
       <Footer />
     </main>
