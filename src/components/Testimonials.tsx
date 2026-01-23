@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Testimonials = () => {
   const testimonials = [
@@ -25,11 +26,40 @@ const Testimonials = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div 
+          className="text-center max-w-2xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="text-primary text-sm font-medium uppercase tracking-wider">
             Depoimentos
           </span>
@@ -40,13 +70,20 @@ const Testimonials = () => {
           <p className="text-muted-foreground text-lg">
             Veja o que nossos clientes dizem sobre o diagnóstico financeiro
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {testimonials.map((testimonial, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               className="p-6 rounded-xl bg-gradient-card border border-border hover:border-primary/30 transition-all duration-300"
             >
               {/* Stars */}
@@ -76,9 +113,9 @@ const Testimonials = () => {
                   <p className="text-muted-foreground text-xs">{testimonial.role}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

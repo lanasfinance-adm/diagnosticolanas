@@ -1,4 +1,5 @@
 import { Target, TrendingUp, Shield, Clock, Award, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Benefits = () => {
   const benefits = [
@@ -34,11 +35,39 @@ const Benefits = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div 
+          className="text-center max-w-2xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="text-primary text-sm font-medium uppercase tracking-wider">
             Por Que Fazer o Diagnóstico
           </span>
@@ -49,13 +78,20 @@ const Benefits = () => {
           <p className="text-muted-foreground text-lg">
             Descubra os benefícios que nossos clientes mais valorizam
           </p>
-        </div>
+        </motion.div>
 
         {/* Benefits grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {benefits.map((benefit, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               className="group p-6 rounded-xl bg-gradient-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-gold"
             >
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
@@ -63,9 +99,9 @@ const Benefits = () => {
               </div>
               <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
               <p className="text-muted-foreground">{benefit.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
