@@ -55,9 +55,7 @@ const Hero = ({
         }} transition={{
           duration: 0.6,
           delay: 0.3
-        }}>E se o seu patrimônio pudesse crescer mais rápido usando estratégias que você ainda não conhece?
-Descubra como 
-Finanças em 7 Dias<span className="text-gradient-gold block mt-2">Finanças em 7 Dias</span>
+        }}>E se o seu patrimônio pudesse crescer mais rápido usando estratégias que você ainda não conhece? 
           </motion.h1>
 
           {/* Subheadline */}
