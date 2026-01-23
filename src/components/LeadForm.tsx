@@ -68,7 +68,7 @@ const LeadForm = ({
             <span className="text-primary text-sm font-medium uppercase tracking-wider">
               Comece Agora
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">Receba seu diagnóstico 
+            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">Receba seu diagnóstico
 Financeiro Gratuito<span className="text-gradient-gold block">Financeiro Gratuito</span>
             </h2>
             <p className="text-muted-foreground">
