@@ -16,31 +16,61 @@ export type Database = {
     Tables: {
       leads: {
         Row: {
+          additional_comments: string | null
+          availability: string | null
+          contact_preference: string | null
           created_at: string
           email: string
+          financial_challenges: string[] | null
+          has_debts: string | null
           id: string
+          investments: string[] | null
+          main_objective: string | null
+          monthly_income: string | null
           name: string
           phone: string | null
           profession: string | null
           specialty: string | null
+          total_assets: string | null
+          urgency_level: string | null
         }
         Insert: {
+          additional_comments?: string | null
+          availability?: string | null
+          contact_preference?: string | null
           created_at?: string
           email: string
+          financial_challenges?: string[] | null
+          has_debts?: string | null
           id?: string
+          investments?: string[] | null
+          main_objective?: string | null
+          monthly_income?: string | null
           name: string
           phone?: string | null
           profession?: string | null
           specialty?: string | null
+          total_assets?: string | null
+          urgency_level?: string | null
         }
         Update: {
+          additional_comments?: string | null
+          availability?: string | null
+          contact_preference?: string | null
           created_at?: string
           email?: string
+          financial_challenges?: string[] | null
+          has_debts?: string | null
           id?: string
+          investments?: string[] | null
+          main_objective?: string | null
+          monthly_income?: string | null
           name?: string
           phone?: string | null
           profession?: string | null
           specialty?: string | null
+          total_assets?: string | null
+          urgency_level?: string | null
         }
         Relationships: []
       }
