@@ -69,7 +69,7 @@ const Benefits = () => {
           <span className="text-primary text-sm font-medium uppercase tracking-wider">
             Por Que Fazer o Diagnóstico
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-6">Transforme sua relação com o Dinheiro<span className="text-gradient-gold"> Dinheiro</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-6">Transforme sua relação com o <span className="text-gradient-gold"> Dinheiro</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Descubra os benefícios que nossos clientes mais valorizam
