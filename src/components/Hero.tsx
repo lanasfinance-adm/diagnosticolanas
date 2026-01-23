@@ -8,7 +8,7 @@ interface HeroProps {
 const Hero = ({
   onCtaClick
 }: HeroProps) => {
-  const benefits = ["Análise completa da sua situação financeira", "Plano de ação personalizado", "Consultoria gratuita de 30 minutos"];
+  const benefits = ["Análise completa da sua situação financeira", "Plano de ação personalizado", "Consultoria gratuita de 45 minutos"];
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-dark">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
