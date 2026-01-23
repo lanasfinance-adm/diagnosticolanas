@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 const LeadForm = forwardRef<HTMLElement>((_, ref) => {
   const {
     toast
@@ -18,18 +19,57 @@ const LeadForm = forwardRef<HTMLElement>((_, ref) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    toast({
-      title: "Diagnóstico Solicitado! 🎉",
-      description: "Em breve você receberá seu diagnóstico personalizado por e-mail."
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: ""
-    });
-    setIsSubmitting(false);
+    try {
+      // Save lead to database
+      const { error: insertError } = await supabase
+        .from("leads")
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+        });
+
+      if (insertError) {
+        console.error("Error saving lead:", insertError);
+        throw new Error("Erro ao salvar dados");
+      }
+
+      // Send confirmation email
+      const { error: emailError } = await supabase.functions.invoke(
+        "send-lead-confirmation",
+        {
+          body: {
+            name: formData.name,
+            email: formData.email,
+          },
+        }
+      );
+
+      if (emailError) {
+        console.error("Error sending email:", emailError);
+        // Don't throw - lead was saved, email is secondary
+      }
+
+      toast({
+        title: "Diagnóstico Solicitado! 🎉",
+        description: "Em breve você receberá seu diagnóstico personalizado por e-mail.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Ocorreu um erro. Por favor, tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
