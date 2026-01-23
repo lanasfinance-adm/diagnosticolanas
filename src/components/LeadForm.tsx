@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-
 const LeadForm = forwardRef<HTMLElement>((_, ref) => {
   const {
     toast
@@ -64,7 +63,7 @@ const LeadForm = forwardRef<HTMLElement>((_, ref) => {
             <span className="text-primary text-sm font-medium uppercase tracking-wider">
               Comece Agora
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">Receba seu diagnóstico 
+            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">Receba seu diagnóstico  
 Financeiro Gratuito
             </h2>
             <p className="text-muted-foreground">
@@ -198,6 +197,5 @@ Financeiro Gratuito
       </div>
     </section>;
 });
-
 LeadForm.displayName = "LeadForm";
 export default LeadForm;
