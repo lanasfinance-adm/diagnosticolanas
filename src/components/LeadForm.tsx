@@ -32,10 +32,13 @@ interface FormData {
 }
 
 const TOTAL_STEPS = 4;
+const HIGH_INCOME_VALUES = ["20k_50k", "50k_100k", "acima_100k"];
 
 const LeadForm = forwardRef<HTMLElement>((_, ref) => {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isHighIncome, setIsHighIncome] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -105,19 +108,8 @@ const LeadForm = forwardRef<HTMLElement>((_, ref) => {
         throw new Error("Erro ao salvar dados");
       }
 
-      toast({
-        title: "Diagnóstico Solicitado! 🎉",
-        description: "Em breve você receberá seu diagnóstico personalizado por e-mail.",
-      });
-
-      setFormData({
-        name: "", email: "", phone: "", profession: "", professionOther: "",
-        specialty: "", monthlyIncome: "", hasDebts: "", totalAssets: "",
-        investments: [], investmentsOther: "", financialChallenges: [],
-        challengesOther: "", mainObjective: "", urgencyLevel: "",
-        contactPreference: "", availability: "", additionalComments: "",
-      });
-      setCurrentStep(1);
+      setIsHighIncome(HIGH_INCOME_VALUES.includes(formData.monthlyIncome));
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -391,6 +383,76 @@ const LeadForm = forwardRef<HTMLElement>((_, ref) => {
   );
 
   const guarantees = ["Diagnóstico 100% gratuito", "Sem compromisso", "Dados protegidos"];
+
+  const resetForm = () => {
+    setFormData({
+      name: "", email: "", phone: "", profession: "", professionOther: "",
+      specialty: "", monthlyIncome: "", hasDebts: "", totalAssets: "",
+      investments: [], investmentsOther: "", financialChallenges: [],
+      challengesOther: "", mainObjective: "", urgencyLevel: "",
+      contactPreference: "", availability: "", additionalComments: "",
+    });
+    setCurrentStep(1);
+    setIsSubmitted(false);
+    setIsHighIncome(false);
+  };
+
+  if (isSubmitted) {
+    return (
+      <section ref={ref} className="py-20 bg-gradient-dark relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-xl mx-auto">
+            <motion.div
+              className="p-10 rounded-2xl bg-gradient-card border border-border shadow-gold text-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-6" />
+              {isHighIncome ? (
+                <>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4">Parabéns! 🎉</h2>
+                  <p className="text-muted-foreground mb-2">
+                    Seu perfil financeiro se qualifica para uma reunião exclusiva com <strong>Jacinto Lanas</strong>.
+                  </p>
+                  <p className="text-muted-foreground mb-8">
+                    Agende agora sua consultoria personalizada e dê o próximo passo rumo à sua liberdade financeira.
+                  </p>
+                  <a
+                    href="https://calendar.app.google/CLreuyJiNbxb41gn8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="gold" size="xl" className="group">
+                      Agendar Reunião com Jacinto Lanas
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </a>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4">Obrigado! 🙏</h2>
+                  <p className="text-muted-foreground mb-2">
+                    Recebemos suas informações com sucesso.
+                  </p>
+                  <p className="text-muted-foreground">
+                    Nossa equipe entrará em contato em breve para dar continuidade ao seu diagnóstico financeiro patrimonial.
+                  </p>
+                </>
+              )}
+              <Button variant="outline" className="mt-8" onClick={resetForm}>
+                Enviar nova aplicação
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={ref} className="py-20 bg-gradient-dark relative overflow-hidden">
